@@ -9,7 +9,10 @@ var R = require('./R');
 
 var defaultB = toBigFactory(require('./Big'));
 var defaultSymbols = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+var joinWithoutSep = R.join('');
+var splitWithoutSep = R.split('');
 var toString = R.invoker(0, 'toString');
+var add = R.invoker(1, 'plus');
 
 var indexOfSymbol = R.memoize(function(symbols) {
   return R.memoize(R.indexOf(R.__, symbols));
@@ -24,7 +27,7 @@ var postprocess = R.memoize(function(symbols) {
     R.identity :
     R.pipe(
       R.map(nthSymbol(symbols)),
-      R.join(''),
+      joinWithoutSep,
       toString
     );
 });
@@ -32,11 +35,11 @@ var postprocess = R.memoize(function(symbols) {
 var toDecimalRaw = R.curryN(4, function(b, symbols, base, n) {
   return R.pipe(
     toString,
-    R.split(''),
+    splitWithoutSep,
     R.reverse,
     R.map(indexOfSymbol(symbols)),
     R.addIndex(R.map)(posNotation.mapper(b, base)),
-    R.reduce(R.invoker(1, 'plus'), b(0)),
+    R.reduce(add, b(0)),
     toString,
     postprocess(symbols)
   )(n);

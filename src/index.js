@@ -35,7 +35,6 @@ var postprocess = R.memoize(function(symbols) {
 var toDecimalRaw = R.curryN(4, function(b, symbols, base, n) {
   return R.pipe(
     toString,
-    splitWithoutSep,
     R.reverse,
     R.map(indexOfSymbol(symbols)),
     R.addIndex(R.map)(posNotation.mapper(b, base)),

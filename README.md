@@ -6,7 +6,8 @@
 
 Auto-curried converter from any base with arbitrary precision support and customisable symbols.
 
-For any to any base conversions, see [base-conversion-to-dec](https://github.com/javiercejudo/base-conversion-to-dec).
+For the opposite behaviour, see [base-conversion-from-dec](https://github.com/javiercejudo/base-conversion-from-dec).
+For any to any base conversions, see [base-conversion](https://github.com/javiercejudo/base-conversion).
 
 ## Install
 

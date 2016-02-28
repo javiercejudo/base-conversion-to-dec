@@ -16,6 +16,10 @@ module.exports = Object.freeze({
   joinWithoutSep: R.join(''),
   joinWithDot: R.join('.'),
 
+  nthSymbol: R.memoize(function(symbols) {
+    return R.memoize(R.nth(R.__, symbols));
+  }),
+
   splitByDot: R.split('.'),
 
   sum: function(big) {

@@ -55,7 +55,7 @@ describe('base conversion', function() {
   });
 
   it('should support non-integer from non-integer base 3.145', function() {
-    fn(3.145, '100.01')
-      .should.be.exactly('9.992126756390263');
+    fn.symbols('0①23456789', 3.145, '①00.0①')
+      .should.be.exactly('9.992①26756390263');
   });
 });

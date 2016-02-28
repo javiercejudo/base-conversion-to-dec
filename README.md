@@ -25,21 +25,32 @@ hexToBin('1E'); //=> '11110'
 
 See [spec](test/spec.js).
 
+## Fractional support (including bases)
+
+```js
+bc(9, '11.08'); //=> '10.098765432098766'
+```
+
+See in [wolfram|Alpha](https://www.wolframalpha.com/input/?i=convert+11.08_9+to+base10).
+
+```js
+bc(3.145, '100.01'); //=> '9.992126756390263'
+```
+
+See in [wolfram|Alpha](https://www.wolframalpha.com/input/?i=convert+100.01+from+base+3.145+to+base10).
+
 ## Custom symbols
 
 For any bases above 62, custom symbols are required.
 See [tests](test/bigint-base-converter.js) for working examples.
 
 ```js
-var bc = require('base-conversion-from-dec');
-
 bc.symbols('⓿①②③④⑤⑥⑦⑧⑨ⒶⒷ', 12, '⑥①'); //=> '⑦③'
 ```
 
 ## Arbitrary precision
 
 ```js
-var bc = require('base-conversion-to-dec');
 var Big = require('arbitrary-precision')(require('bigjs-adapter'));
 var toBigFactory = require('to-decimal-arbitrary-precision');
 
@@ -55,7 +66,6 @@ bc.big(d, 9, '802531310452364303450750087576673257456135727727');
 ## Full raw version
 
 ```js
-var bc = require('base-conversion-to-dec');
 var Big = require('arbitrary-precision')(require('bigjs-adapter'));
 var toBigFactory = require('to-decimal-arbitrary-precision');
 

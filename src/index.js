@@ -6,51 +6,34 @@ var posNotation = require('positional-notation');
 var toBigFactory = require('to-decimal-arbitrary-precision');
 
 var R = require('./R');
+var U = require('./U');
+var toDecimalAlg = require('./algorithm');
+var fracMapper = require('./fracMapper');
+var translate = require('./translate');
 
-var defaultB = toBigFactory(require('./Big'));
+var defaultBig = toBigFactory(require('./Big'));
 var defaultSymbols = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-var joinWithoutSep = R.join('');
-var splitWithoutSep = R.split('');
-var toString = R.invoker(0, 'toString');
-var add = R.invoker(1, 'plus');
 
-var indexOfSymbol = R.memoize(function(symbols) {
-  return R.memoize(R.indexOf(R.__, symbols));
-});
-
-var nthSymbol = R.memoize(function(symbols) {
-  return R.memoize(R.nth(R.__, symbols));
-});
-
-var postprocess = R.memoize(function(symbols) {
-  return R.identical(symbols, defaultSymbols) ?
-    R.identity :
-    R.pipe(
-      R.map(nthSymbol(symbols)),
-      joinWithoutSep,
-      toString
-    );
-});
-
-var toDecimalRaw = R.curryN(4, function(b, symbols, base, n) {
+var toDecimalRaw = R.curryN(4, function(big, symbols, base, n) {
   return R.pipe(
-    toString,
-    R.reverse,
-    R.map(indexOfSymbol(symbols)),
-    R.addIndex(R.map)(posNotation.mapper(b, base)),
-    R.reduce(add, b(0)),
-    toString,
-    postprocess(symbols)
+    U.toString,
+    U.splitByDot,
+    R.adjust(R.reverse, 0),
+    R.adjust(toDecimalAlg(posNotation.mapper, big, symbols, base), 0),
+    R.adjust(toDecimalAlg(fracMapper, big, symbols, base), 1),
+    U.sum(big),
+    U.toString,
+    translate(defaultSymbols, symbols)
   )(n);
 });
 
-var toDecimal = toDecimalRaw(defaultB, defaultSymbols);
+var toDecimal = toDecimalRaw(defaultBig, defaultSymbols);
 
 toDecimal.big = toDecimalRaw(R.__, defaultSymbols);
-toDecimal.symbols = toDecimalRaw(defaultB);
+toDecimal.symbols = toDecimalRaw(defaultBig);
 toDecimal.raw = toDecimalRaw;
 
 toDecimal.defaultSymbols = defaultSymbols;
-toDecimal.defaultB = defaultB;
+toDecimal.defaultBig = defaultBig;
 
 module.exports = toDecimal;

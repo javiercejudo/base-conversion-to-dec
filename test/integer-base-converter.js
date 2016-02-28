@@ -19,4 +19,12 @@ describe('integer-base-converter', function() {
       .should.be.exactly(other.convert('Gf', 60, 10).toString())
       .and.exactly(b60To10('Gf'));
   });
+
+  it.skip('yields the same results for fractionals from base 60', function() {
+    var b60To10 = fn(60);
+
+    '3.14159'
+      .should.be.exactly(other.convert('3.8ThQO', 60, 10).toString())
+      .and.exactly(b60To10('3.8ThQO'));
+  });
 });

@@ -37,5 +37,6 @@ toDecimal.raw = toDecimalRaw;
 
 toDecimal.defaultSymbols = defaultSymbols;
 toDecimal.defaultBig = defaultBig;
+toDecimal.__ = R.__;
 
 module.exports = toDecimal;

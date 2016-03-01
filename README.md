@@ -31,13 +31,13 @@ See [spec](test/spec.js).
 bc(9, '11.08'); //=> '10.098765432098766'
 ```
 
-See in [wolfram|Alpha](https://www.wolframalpha.com/input/?i=convert+11.08_9+to+base10).
+See in [Wolfram|Alpha](https://www.wolframalpha.com/input/?i=convert+11.08_9+to+base10).
 
 ```js
 bc(3.145, '100.01'); //=> '9.992126756390263'
 ```
 
-See in [wolfram|Alpha](https://www.wolframalpha.com/input/?i=convert+100.01+from+base+3.145+to+base10).
+See in [Wolfram|Alpha](https://www.wolframalpha.com/input/?i=convert+100.01+from+base+3.145+to+base10).
 
 ## Custom symbols
 

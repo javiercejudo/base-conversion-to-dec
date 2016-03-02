@@ -13,9 +13,6 @@ module.exports = Object.freeze({
     return R.memoize(R.indexOf(R.__, symbols));
   }),
 
-  joinWithoutSep: R.join(''),
-  joinWithDot: R.join('.'),
-
   splitByDot: R.split('.'),
 
   sum: function(big) {

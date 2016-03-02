@@ -14,7 +14,6 @@ module.exports = Object.freeze({
   join: require('ramda/src/join'),
   map: require('ramda/src/map'),
   memoize: require('ramda/src/memoize'),
-  nth: require('ramda/src/nth'),
   pipe: require('ramda/src/pipe'),
   reduce: require('ramda/src/reduce'),
   reverse: require('ramda/src/reverse'),

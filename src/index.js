@@ -20,11 +20,11 @@ var toDecimalRaw = R.curryN(4, function(big, symbols, base, n) {
     U.splitByDot, // [ '①00', '0①' ]
     R.map(R.map(U.indexOfSymbol(symbols))), // [ '100', '01' ]
     R.adjust(R.reverse, 0), // [ '001', '01' ]
-    R.adjust(toDecimalAlg(posNotation.mapper, big, symbols, base), 0), // [ big('9.891025'), '01' ]
-    R.adjust(toDecimalAlg(fracMapper, big, symbols, base), 1), // [ big('9.891025'), big('0.10110175639026288') ]
+    R.adjust(toDecimalAlg(posNotation.mapper, big, base), 0), // [ big('9.891025'), '01' ]
+    R.adjust(toDecimalAlg(fracMapper, big, base), 1), // [ big('9.891025'), big('0.10110175639026288') ]
     U.sum(big), // big('9.992126756390263')
     U.toString, // '9.992126756390263'
-    translate(defaultSymbols, symbols)
+    translate(defaultSymbols, symbols) // '9.992①26756390263'
   )(n);
 });
 
